@@ -1,0 +1,268 @@
+/* style.css */
+
+/* Gaya Asas */
+body {
+    font-family: 'Inter', sans-serif; /* Menggunakan fon Inter */
+    margin: 0;
+    padding: 0;
+    color: #343a40; /* Warna teks gelap */
+    line-height: 1.7; /* Jarak baris yang lebih selesa */
+    overflow-x: hidden; /* Mencegah skrol mendatar */
+    background-color: #eef2f7; /* Latar belakang lebih lembut */
+    background-image: radial-gradient(circle at top left, #f0f4f7, #eef2f7); /* Gradien latar belakang halus */
+}
+
+/* Container untuk mengehadkan lebar kandungan */
+.container {
+    width: 95%; /* Lebar responsif */
+    max-width: 1200px; /* Lebar maksimum */
+    margin: 0 auto; /* Tengah-tengah */
+    padding: 20px;
+}
+
+/* Header */
+header {
+    background-color: #007bff; /* Warna biru utama */
+    color: white;
+    padding: 35px 0; /* Padding lebih besar */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3); /* Bayang yang lebih dalam */
+    border-bottom-left-radius: 25px; /* Sudut bulat di bawah */
+    border-bottom-right-radius: 25px;
+    margin-bottom: 50px; /* Jarak bawah dari header */
+    background-image: linear-gradient(to right, #007bff, #0056b3, #004080); /* Latar belakang gradien yang lebih kaya */
+    position: relative; /* Untuk elemen pseudo */
+    overflow: hidden; /* Untuk memastikan pseudo-element tidak melimpah */
+    z-index: 1; /* Pastikan header di atas kandungan lain */
+}
+
+/* Pseudo-element untuk kesan visual pada header */
+header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.05);
+    transform: rotate(30deg);
+    z-index: 0;
+    pointer-events: none;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 3em; /* Saiz fon tajuk yang lebih besar */
+    text-align: center;
+    font-weight: 900; /* Sangat sangat tebal */
+    letter-spacing: 2px; /* Jarak huruf lebih */
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.4); /* Bayang teks yang lebih ketara */
+    position: relative; /* Untuk z-index di atas pseudo */
+    z-index: 1;
+}
+
+/* Gaya untuk kotak acara yang boleh dikembang/kecut */
+.collapsible-section {
+    background-color: rgba(255, 255, 255, 0.95); /* Latar belakang putih separa lutsinar */
+    margin-bottom: 30px; /* Jarak antara kotak */
+    border-radius: 18px; /* Sudut bulat lebih ketara */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.18); /* Bayang lembut yang lebih dalam */
+    border: 1px solid #d0d0d0; /* Sempadan lembut */
+    overflow: hidden; /* Penting untuk animasi ketinggian */
+    transition: transform 0.4s ease-out, box-shadow 0.4s ease-out; /* Transisi pada hover */
+    position: relative; /* Untuk z-index */
+    z-index: 1; /* Pastikan seksyen di atas kandungan lain */
+}
+
+.collapsible-section:hover {
+    transform: translateY(-8px); /* Kesan 'naik' sedikit pada hover */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25); /* Bayang lebih kuat pada hover */
+}
+
+.collapsible-header {
+    background-color: #007bff; /* Warna biru untuk header */
+    color: white;
+    padding: 22px 35px; /* Padding lebih besar */
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 2.2em; /* Saiz fon tajuk acara */
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease, border-radius 0.3s ease, background-image 0.3s ease;
+    border-top-left-radius: 18px; /* Sudut bulat untuk header */
+    border-top-right-radius: 18px;
+    background-image: linear-gradient(to right, #007bff, #0056b3); /* Gradien pada header */
+}
+
+.collapsible-header:hover {
+    background-color: #0056b3; /* Warna biru gelap pada hover */
+}
+
+.collapsible-header.active {
+    border-bottom-left-radius: 0; /* Buang sudut bulat apabila aktif */
+    border-bottom-right-radius: 0;
+    background-image: linear-gradient(to right, #0056b3, #003f80); /* Gradien lebih gelap apabila aktif */
+}
+
+.collapsible-header h2 { /* Menetapkan gaya untuk h2 di dalam collapsible-header */
+    margin: 0; /* Buang margin lalai h2 */
+    color: inherit; /* Warisi warna teks dari header */
+    font-size: inherit; /* Warisi saiz fon dari header */
+    font-weight: inherit; /* Warisi berat fon dari header */
+}
+
+.toggle-icon {
+    font-size: 2em; /* Saiz ikon lebih besar */
+    font-weight: bold;
+    transition: transform 0.4s ease; /* Animasi putaran yang lebih lancar */
+    color: #ffffff; /* Warna putih untuk ikon */
+}
+
+.collapsible-header.active .toggle-icon {
+    transform: rotate(45deg); /* Putar ikon '+' menjadi 'x' atau '-' */
+}
+
+.collapsible-content {
+    padding: 0 35px; /* Padding sisi sahaja */
+    background-color: #ffffff;
+    max-height: 0; /* Sembunyikan kandungan secara lalai */
+    overflow: hidden;
+    transition: max-height 0.7s ease-out, padding 0.7s ease-out; /* Animasi ketinggian dan padding yang lebih lancar */
+}
+
+.collapsible-content.show {
+    max-height: 4000px; /* Ketinggian maksimum yang cukup besar untuk kandungan */
+    padding-top: 35px; /* Tambah padding atas apabila dibuka */
+    padding-bottom: 35px; /* Tambah padding bawah apabila dibuka */
+}
+
+/* Gaya kandungan dalam seksyen */
+.collapsible-content h3 {
+    color: #28a745; /* Warna hijau yang lebih menonjol */
+    margin-top: 40px; /* Jarak lebih dari atas */
+    margin-bottom: 20px;
+    font-size: 1.8em; /* Saiz fon sub-tajuk */
+    font-weight: 700;
+    border-left: 7px solid #28a745; /* Garisan hijau yang lebih tebal di sebelah kiri */
+    padding-left: 18px; /* Padding lebih */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* Bayang teks halus */
+}
+
+.collapsible-content h4 {
+    color: #5a5a5a;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 1.3em; /* Saiz fon sub-sub-tajuk */
+    font-weight: 600;
+    border-bottom: 1px dashed #e0e0e0; /* Garisan putus-putus halus */
+    padding-bottom: 5px;
+}
+
+.collapsible-content ul, .collapsible-content ol {
+    list-style: disc; /* Gaya senarai bullet */
+    margin-left: 40px; /* Jarak lebih */
+    margin-bottom: 20px;
+    padding-left: 0;
+}
+
+.collapsible-content ol {
+    list-style: decimal;
+}
+
+.collapsible-content p {
+    margin-bottom: 12px;
+}
+
+/* Jadual dalam kandungan */
+.collapsible-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 30px 0;
+    border-radius: 12px; /* Sudut bulat untuk jadual */
+    overflow: hidden; /* Memastikan sudut bulat kelihatan */
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.collapsible-content table th, .collapsible-content table td {
+    border: 1px solid #e0e0e0; /* Sempadan jadual yang lebih lembut */
+    padding: 18px; /* Padding lebih */
+    text-align: left;
+}
+
+.collapsible-content table th {
+    background-color: #f0f4f7; /* Latar belakang header jadual yang lebih cerah */
+    color: #343a40;
+    font-weight: 700;
+    text-transform: uppercase; /* Teks header huruf besar */
+    letter-spacing: 0.5px;
+}
+
+.collapsible-content table tbody tr:nth-child(even) {
+    background-color: #f8f8f8; /* Warna latar belakang berselang-seli yang lebih lembut */
+}
+
+.collapsible-content table tbody tr:hover {
+    background-color: #e6f0ff; /* Latar belakang hover untuk baris jadual */
+    transition: background-color 0.2s ease;
+}
+
+/* Footer */
+footer {
+    background-color: #343a40; /* Warna gelap */
+    color: white;
+    text-align: center;
+    padding: 35px 0; /* Padding lebih besar */
+    margin-top: 60px;
+    border-top-left-radius: 25px; /* Sudut bulat di atas */
+    border-top-right-radius: 25px;
+    background-image: linear-gradient(to left, #343a40, #212529); /* Gradien pada footer */
+    box-shadow: 0 -6px 18px rgba(0,0,0,0.25); /* Bayang di atas footer */
+    position: relative; /* Untuk z-index */
+    z-index: 1; /* Pastikan footer di atas kandungan lain */
+}
+
+footer p {
+    margin: 0;
+    font-size: 1em;
+    letter-spacing: 0.5px;
+}
+
+/* Responsif untuk skrin kecil */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.2em;
+    }
+    .collapsible-header {
+        font-size: 1.7em;
+        padding: 18px 25px;
+    }
+    .toggle-icon {
+        font-size: 1.6em;
+    }
+    .collapsible-content {
+        padding: 0 25px;
+    }
+    .collapsible-content.show {
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+    .collapsible-content h3 {
+        font-size: 1.4em;
+        border-left-width: 5px;
+        padding-left: 12px;
+    }
+    .collapsible-content h4 {
+        font-size: 1.1em;
+    }
+    .collapsible-content ul, .collapsible-content ol {
+        margin-left: 25px;
+    }
+    .collapsible-content table th, .collapsible-content table td {
+        padding: 12px;
+        font-size: 0.8em;
+    }
+}
